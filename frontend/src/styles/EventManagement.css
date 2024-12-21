@@ -1,0 +1,59 @@
+.event-management-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  .events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .event-card {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #f9f9f9;
+  }
+  
+  .event-card h2 {
+    margin: 0;
+    color: #333;
+  }
+  
+  .event-card p {
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  .register-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .registered-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: not-allowed;
+  }
+  
+  .register-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Highlight academic and club events */
+  .academic {
+    border-left: 8px solid blue;
+  }
+  
+  .club {
+    border-left: 8px solid green;
+  }
+  

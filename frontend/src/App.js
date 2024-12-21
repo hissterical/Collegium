@@ -4,7 +4,6 @@ import Login from './screens/Login';
 import Dashboard from './screens/Dashboard';
 import ExpertiseMarketplace from './screens/ExpertiseMarketplace';
 import EquipmentMarketplace from './screens/EquipmentMarketplace';
-import Calendar from './screens/Calendar';
 import EventManagement from './screens/EventManagement';
 import SignUp from './screens/SignUp';
 
@@ -17,7 +16,6 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/expertise-marketplace" element={<ExpertiseMarketplace />} />
         <Route path="/equipment-marketplace" element={<EquipmentMarketplace />} />
-        <Route path="/calendar" element={<Calendar />} />
         <Route path="/event-management" element={<EventManagement />} />
         <Route path="/signup" element={<SignUp />} />
 
