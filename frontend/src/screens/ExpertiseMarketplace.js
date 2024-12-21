@@ -2,183 +2,145 @@ import React, { useState } from 'react';
 import '../styles/ExpertiseMarketplace.css';
 
 const ExpertiseMarketplace = () => {
-  const [requests, setRequests] = useState([
-    {
-      id: 1,
-      title: 'AI Project Help',
-      description: 'Looking for help with building a neural network.',
-      track: 'AI',
-      helpType: 'Assignment',
-      userProfile: '/profile/1',
-      isMyRequest: false,
-      offers: [
-        { user: 'User1', profileLink: '/profile/1' },
-        { user: 'User2', profileLink: '/profile/2' }
-      ]
-    },
-    {
-      id: 2,
-      title: 'Sports Buddy Wanted',
-      description: 'Seeking a fitness partner for running and workouts.',
-      track: 'Sports',
-      helpType: 'Collaboration',
-      userProfile: '/profile/2',
-      isMyRequest: true,  // This request is created by the logged-in user
-      offers: [
-        { user: 'User3', profileLink: '/profile/3' },
-        { user: 'User4', profileLink: '/profile/4' }
-      ]
-    }
-  ]);
-
-  const [filterTrack, setFilterTrack] = useState('');
-  const [filterHelpType, setFilterHelpType] = useState('');
+  const [helpType, setHelpType] = useState('');
+  const [description, setDescription] = useState('');
+  const [track, setTrack] = useState('');
+  const [deadline, setDeadline] = useState('');
+  const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [newRequest, setNewRequest] = useState({
-    title: '',
-    description: '',
-    track: '',
-    helpType: ''
-  });
-  const [showProfileModal, setShowProfileModal] = useState(false);
-  const [selectedRequest, setSelectedRequest] = useState(null);
+  const [selectedRequest, setSelectedRequest] = useState(null); // State for selected request
 
-  const handleOpenModal = () => {
-    setShowModal(true);
+  // Example data for requests posted by others (in a real scenario, fetch from a backend)
+  const postedRequests = [
+    { id: 1, title: 'Math Assignment Help', helpType: 'Assignment', track: 'Math', description: 'Need help with solving calculus problems', deadline: '2024-12-25' },
+    { id: 2, title: 'AI-based Recommendation System', helpType: 'Project', track: 'AI', description: 'Looking for help to build a recommendation system using machine learning', deadline: '2024-12-30' },
+    { id: 3, title: 'Sports Buddy Needed', helpType: 'Project', track: 'Sports', description: 'Looking for a partner for regular jogging sessions', deadline: '2024-12-31' }
+  ];
+
+  // Handle form submission for creating a new request
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!helpType || !description || !track || !deadline) {
+      setError('Please fill in all fields.');
+      return;
+    }
+    setError('');
+    console.log('Request posted:', { helpType, description, track, deadline });
+    // Call backend API to save the request
+    setShowModal(false); // Close the modal after posting the request
   };
 
   const handleCloseModal = () => {
-    setShowModal(false);
+    setShowModal(false); // Close modal without posting
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewRequest((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+  const handleOpenModal = () => {
+    setShowModal(true); // Open modal to add a new request
   };
 
-  const handleSubmitRequest = (e) => {
-    e.preventDefault();
-    setRequests([...requests, { ...newRequest, id: requests.length + 1, isMyRequest: true }]);
-    setNewRequest({ title: '', description: '', track: '', helpType: '' });
-    setShowModal(false);
+  const handleRequestClick = (request) => {
+    setSelectedRequest(request); // Set selected request to display its details
   };
 
-  const handleOpenProfileModal = (requestId) => {
-    const request = requests.find(req => req.id === requestId);
-    setSelectedRequest(request);
-    setShowProfileModal(true);
+  const handleCloseDetailView = () => {
+    setSelectedRequest(null); // Close the detailed view
   };
-
-  const handleCloseProfileModal = () => {
-    setShowProfileModal(false);
-    setSelectedRequest(null);
-  };
-
-  const filteredRequests = requests.filter(
-    (request) =>
-      (filterTrack ? request.track === filterTrack : true) &&
-      (filterHelpType ? request.helpType === filterHelpType : true)
-  );
 
   return (
-    <div className="marketplace-container">
-      <h1>Expertise Marketplace</h1>
-      <div className="filters">
-        <select onChange={(e) => setFilterTrack(e.target.value)} value={filterTrack}>
-          <option value="">Select Track</option>
-          <option value="AI">AI</option>
-          <option value="Sports">Sports</option>
-          <option value="Programming">Programming</option>
-        </select>
+    <div className="expertise-container">
+      {/* Add Request Button */}
+      <button className="add-request-button" onClick={handleOpenModal}>
+        Add a Request
+      </button>
 
-        <select onChange={(e) => setFilterHelpType(e.target.value)} value={filterHelpType}>
-          <option value="">Select Help Type</option>
-          <option value="Assignment">Assignment</option>
-          <option value="Collaboration">Collaboration</option>
-          <option value="Consultation">Consultation</option>
-        </select>
-
-        <button onClick={handleOpenModal}>Create Request</button>
-      </div>
-
+      {/* Requests List */}
       <div className="requests-list">
-        {filteredRequests.map((request) => (
-          <div key={request.id} className="request-card">
-            <h3>{request.title}</h3>
-            <p><strong>Track:</strong> {request.track}</p>
-            <p>{request.description}</p>
-
-            {request.isMyRequest ? (
-              <>
-                <button onClick={() => handleOpenProfileModal(request.id)}>View Profiles</button>
-                <button>Cancel</button>
-              </>
-            ) : (
-              <>
-                <button onClick={() => window.location.href = request.userProfile}>
-                  View Profile
-                </button>
-                <button onClick={() => window.location.href = `/message/${request.id}`}>
-                  Contact
-                </button>
-              </>
-            )}
-          </div>
-        ))}
+        <h2>Requests from Others</h2>
+        <div className="requests">
+          {postedRequests.length === 0 ? (
+            <p>No requests posted yet.</p>
+          ) : (
+            postedRequests.map((request) => (
+              <div
+                key={request.id}
+                className="request-card"
+                onClick={() => handleRequestClick(request)}
+              >
+                <h3>{request.title}</h3>
+                <p><strong>Help Type:</strong> {request.helpType}</p>
+                <p><strong>Track:</strong> {request.track}</p>
+                <p><strong>Deadline:</strong> {request.deadline}</p>
+              </div>
+            ))
+          )}
+        </div>
       </div>
 
-      {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>Create New Request</h2>
-            <form onSubmit={handleSubmitRequest}>
-              <input
-                type="text"
-                name="title"
-                placeholder="Request Title"
-                value={newRequest.title}
-                onChange={handleChange}
-              />
-              <textarea
-                name="description"
-                placeholder="Description"
-                value={newRequest.description}
-                onChange={handleChange}
-              />
-              <select name="track" value={newRequest.track} onChange={handleChange}>
-                <option value="">Select Track</option>
-                <option value="AI">AI</option>
-                <option value="Sports">Sports</option>
-                <option value="Programming">Programming</option>
-              </select>
-              <select name="helpType" value={newRequest.helpType} onChange={handleChange}>
-                <option value="">Select Help Type</option>
-                <option value="Assignment">Assignment</option>
-                <option value="Collaboration">Collaboration</option>
-                <option value="Consultation">Consultation</option>
-              </select>
-              <button type="submit">Submit Request</button>
-              <button type="button" onClick={handleCloseModal}>Cancel</button>
-            </form>
-          </div>
+      {/* Detailed View of Selected Request */}
+      {selectedRequest && (
+        <div className="request-detail-view">
+          <button onClick={handleCloseDetailView} className="close-detail-button">Close</button>
+          <h2>{selectedRequest.title}</h2>
+          <p><strong>Help Type:</strong> {selectedRequest.helpType}</p>
+          <p><strong>Track:</strong> {selectedRequest.track}</p>
+          <p><strong>Description:</strong> {selectedRequest.description}</p>
+          <p><strong>Deadline:</strong> {selectedRequest.deadline}</p>
         </div>
       )}
 
-      {showProfileModal && selectedRequest && (
-        <div className="modal">
+      {/* Modal for Add Request */}
+      {showModal && (
+        <div className="modal-overlay">
           <div className="modal-content">
-            <h2>People Who Want to Help</h2>
-            <ul>
-              {selectedRequest.offers.map((offer, index) => (
-                <li key={index}>
-                  <a href={offer.profileLink}>{offer.user}</a>
-                </li>
-              ))}
-            </ul>
-            <button type="button" onClick={handleCloseProfileModal}>Close</button>
+            <h1>Post a Request for Help</h1>
+            <form onSubmit={handleSubmit}>
+              <div className="input-group">
+                <label>Help Type:</label>
+                <select
+                  value={helpType}
+                  onChange={(e) => setHelpType(e.target.value)}
+                >
+                  <option value="">Select Help Type</option>
+                  <option value="assignment">Assignment</option>
+                  <option value="project">Project</option>
+                </select>
+              </div>
+              <div className="input-group">
+                <label>Track:</label>
+                <select
+                  value={track}
+                  onChange={(e) => setTrack(e.target.value)}
+                >
+                  <option value="">Select Track</option>
+                  <option value="AI">AI</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Math">Math</option>
+                  <option value="Programming">Programming</option>
+                  <option value="Design">Design</option>
+                </select>
+              </div>
+              <div className="input-group">
+                <label>Description:</label>
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Describe the help you need"
+                />
+              </div>
+              <div className="input-group">
+                <label>Deadline:</label>
+                <input
+                  type="date"
+                  value={deadline}
+                  onChange={(e) => setDeadline(e.target.value)}
+                />
+              </div>
+              {error && <div className="error">{error}</div>}
+              <div className="modal-buttons">
+                <button type="submit" className="submit-button">Post Request</button>
+                <button type="button" className="cancel-button" onClick={handleCloseModal}>Cancel</button>
+              </div>
+            </form>
           </div>
         </div>
       )}
