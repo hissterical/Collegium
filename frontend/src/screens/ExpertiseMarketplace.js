@@ -9,12 +9,7 @@ const ExpertiseMarketplace = () => {
       description: 'Looking for help with building a neural network.',
       track: 'AI',
       helpType: 'Assignment',
-      userProfile: '/profile/1',
-      isMyRequest: false,
-      offers: [
-        { user: 'User1', profileLink: '/profile/1' },
-        { user: 'User2', profileLink: '/profile/2' }
-      ]
+      userProfile: '/profile/1', // Link to the profile of the person who posted
     },
     {
       id: 2,
@@ -22,12 +17,15 @@ const ExpertiseMarketplace = () => {
       description: 'Seeking a fitness partner for running and workouts.',
       track: 'Sports',
       helpType: 'Collaboration',
-      userProfile: '/profile/2',
-      isMyRequest: true,  // This request is created by the logged-in user
-      offers: [
-        { user: 'User3', profileLink: '/profile/3' },
-        { user: 'User4', profileLink: '/profile/4' }
-      ]
+      userProfile: '/profile/2', // Link to the profile of the person who posted
+    },
+    {
+      id: 3,
+      title: 'Programming Assistance',
+      description: 'Need help with debugging a Python project.',
+      track: 'Programming',
+      helpType: 'Consultation',
+      userProfile: '/profile/3', // Link to the profile of the person who posted
     }
   ]);
 
@@ -40,8 +38,6 @@ const ExpertiseMarketplace = () => {
     track: '',
     helpType: ''
   });
-  const [showProfileModal, setShowProfileModal] = useState(false);
-  const [selectedRequest, setSelectedRequest] = useState(null);
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -61,20 +57,9 @@ const ExpertiseMarketplace = () => {
 
   const handleSubmitRequest = (e) => {
     e.preventDefault();
-    setRequests([...requests, { ...newRequest, id: requests.length + 1, isMyRequest: true }]);
+    setRequests([...requests, { ...newRequest, id: requests.length + 1 }]);
     setNewRequest({ title: '', description: '', track: '', helpType: '' });
     setShowModal(false);
-  };
-
-  const handleOpenProfileModal = (requestId) => {
-    const request = requests.find(req => req.id === requestId);
-    setSelectedRequest(request);
-    setShowProfileModal(true);
-  };
-
-  const handleCloseProfileModal = () => {
-    setShowProfileModal(false);
-    setSelectedRequest(null);
   };
 
   const filteredRequests = requests.filter(
@@ -110,22 +95,10 @@ const ExpertiseMarketplace = () => {
             <h3>{request.title}</h3>
             <p><strong>Track:</strong> {request.track}</p>
             <p>{request.description}</p>
-
-            {request.isMyRequest ? (
-              <>
-                <button onClick={() => handleOpenProfileModal(request.id)}>View Profiles</button>
-                <button>Cancel</button>
-              </>
-            ) : (
-              <>
-                <button onClick={() => window.location.href = request.userProfile}>
-                  View Profile
-                </button>
-                <button onClick={() => window.location.href = `/message/${request.id}`}>
-                  Contact
-                </button>
-              </>
-            )}
+            <button onClick={() => window.location.href = request.userProfile}>
+              View Profile
+            </button>
+            <button>Contact</button>
           </div>
         ))}
       </div>
@@ -163,22 +136,6 @@ const ExpertiseMarketplace = () => {
               <button type="submit">Submit Request</button>
               <button type="button" onClick={handleCloseModal}>Cancel</button>
             </form>
-          </div>
-        </div>
-      )}
-
-      {showProfileModal && selectedRequest && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>People Who Want to Help</h2>
-            <ul>
-              {selectedRequest.offers.map((offer, index) => (
-                <li key={index}>
-                  <a href={offer.profileLink}>{offer.user}</a>
-                </li>
-              ))}
-            </ul>
-            <button type="button" onClick={handleCloseProfileModal}>Close</button>
           </div>
         </div>
       )}

@@ -1,0 +1,107 @@
+.equipment-marketplace-container {
+    padding: 20px;
+    text-align: center;
+    background-color: #f4f4f9;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .items-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .item-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    text-align: left;
+  }
+  
+  .item-card h3 {
+    color: #007bff;
+    font-size: 18px;
+  }
+  
+  .item-card p {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: left;
+  }
+  
+  .modal-content h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .modal-content input,
+  .modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .modal-content button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .modal-content button:hover {
+    background-color: #0056b3;
+  }
+  
+  .modal-content button[type="button"] {
+    background-color: #f44336;
+  }
+  
+  .modal-content button[type="button"]:hover {
+    background-color: #d32f2f;
+  }
+  
