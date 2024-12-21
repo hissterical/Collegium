@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.2.1",
     "cra-template": "1.2.0",
+<<<<<<< HEAD
     "date-fns": "^4.1.0",
     "firebase": "^11.1.0",
     "moment": "^2.30.1",
@@ -14,6 +15,13 @@
     "react-big-calendar": "^1.5.0",
     "react-calendar": "^5.1.0",
     "react-dom": "^18.0.0",
+=======
+    "firebase": "^11.1.0",
+    "moment": "^2.30.1",
+    "react": "^19.0.0",
+    "react-calendar": "^5.1.0",
+    "react-dom": "^19.0.0",
+>>>>>>> bf671607aa844aba01e3651a6e60a2c49f1e9384
     "react-hook-form": "^7.54.1",
     "react-router-dom": "^7.0.2",
     "react-scripts": "5.0.1",
