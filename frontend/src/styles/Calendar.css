@@ -1,0 +1,42 @@
+.calendar-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.calendar-page h1 {
+  text-align: center;
+  color: #333;
+}
+
+.rbc-calendar {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.rbc-toolbar {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border-radius: 5px 5px 0 0;
+}
+
+.rbc-toolbar button {
+  background-color: white;
+  color: #4caf50;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.rbc-toolbar button:hover {
+  background-color: #e8e8e8;
+}
+
+.rbc-event {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
