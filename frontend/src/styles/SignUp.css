@@ -1,21 +1,21 @@
-/* src/pages/Login.css */
-.login-container {
+/* src/styles/SignUp.css */
+.signup-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
     font-family: 'Arial', sans-serif;
     color: #fff;
 }
 
-.login-form {
+.signup-form {
     background: #fff;
     color: #333;
     padding: 40px 30px;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    width: 90%;
+    width: 100%;
     max-width: 400px;
     animation: fadeIn 0.5s ease-in-out;
 }
@@ -28,15 +28,10 @@ h1 {
     text-align: center;
 }
 
-.input-group input {
-  width: 100%;
-  padding: 10px; /* Add inner padding */
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  box-sizing: border-box; /* Ensures padding doesn't affect width */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
 }
-
 
 .input-group label {
     display: block;
@@ -56,9 +51,9 @@ h1 {
 }
 
 .input-group input:focus {
-    border-color: #007bff;
+    border-color: #ff7e5f;
     outline: none;
-    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 4px rgba(255, 126, 95, 0.5);
 }
 
 .error {
@@ -68,10 +63,10 @@ h1 {
     text-align: left;
 }
 
-.login-button {
+.signup-button {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
     color: #fff;
     font-size: 16px;
     font-weight: bold;
@@ -81,8 +76,8 @@ h1 {
     transition: background 0.3s;
 }
 
-.login-button:hover {
-    background: linear-gradient(135deg, #2575fc, #6a11cb);
+.signup-button:hover {
+    background: linear-gradient(135deg, #feb47b, #ff7e5f);
 }
 
 .links {
@@ -93,34 +88,15 @@ h1 {
 }
 
 .links a {
-    color: #6a11cb;
+    color: #ff7e5f;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
 }
 
 .links a:hover {
-    color: #2575fc;
+    color: #feb47b;
     text-decoration: underline;
-}
-
-.checkbox-group {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-}
-
-.checkbox-group label {
-    margin-bottom: 8px;
-    font-size: 14px;
-    color: #555;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-
-.checkbox-group input {
-    margin-right: 10px;
 }
 
 @keyframes fadeIn {
