@@ -1,4 +1,4 @@
-/* src/screens/ExpertiseMarketplace.css */
+/* src/styles/ExpertiseMarketplace.css */
 .marketplace-container {
     padding: 20px;
     text-align: center;
@@ -53,13 +53,36 @@
     color: white;
     padding: 10px;
     font-size: 14px;
-    border: none;
+    border: 1;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
   }
   
   .request-card button:hover {
+    background-color: #0056b3;
+  }
+  
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .contact-button,
+  .view-profile-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .contact-button:hover,
+  .view-profile-button:hover {
     background-color: #0056b3;
   }
   
@@ -77,13 +100,9 @@
   
   .modal-content {
     background: white;
-    padding: 30px;
+    padding: 20px;
     border-radius: 10px;
     width: 400px;
-    text-align: left;
-  }
-  
-  .modal-content h2 {
     text-align: center;
   }
   
@@ -98,25 +117,15 @@
   }
   
   .modal-content button {
+    padding: 10px 20px;
     background-color: #007bff;
     color: white;
-    padding: 10px;
-    font-size: 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 10px;
   }
   
   .modal-content button:hover {
     background-color: #0056b3;
-  }
-  
-  .modal-content button[type="button"] {
-    background-color: #f44336;
-  }
-  
-  .modal-content button[type="button"]:hover {
-    background-color: #d32f2f;
   }
   
